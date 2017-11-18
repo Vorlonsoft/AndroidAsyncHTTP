@@ -21,11 +21,12 @@ import android.os.Build;
 import android.os.Process;
 import android.os.StrictMode;
 import android.support.annotation.RequiresApi;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import com.squareup.leakcanary.LeakCanary;
 
-public class SampleApplication extends Application {
+public class SampleApplication extends MultiDexApplication {
 
     private static final String LOG_TAG = "SampleApplication";
 
