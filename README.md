@@ -10,6 +10,7 @@ Features
 - Requests use a **threadpool** to cap concurrent resource usage
 - GET/POST **params builder** (RequestParams)
 - **Multipart file uploads** with no additional third party libraries
+- Tiny size overhead to your application, only **100kb** for everything
 - Automatic smart **request retries** optimized for spotty mobile connections
 - Automatic **gzip** response decoding support for super-fast requests
 - Optional built-in response parsing into **JSON** (JsonHttpResponseHandler)

@@ -23,8 +23,8 @@ android {
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion 27
-        versionCode 150
-        versionName "1.5.0"
+        versionCode 151
+        versionName "1.5.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
@@ -35,7 +35,6 @@ android {
         release {
             postprocessing {
                 removeUnusedCode false
-                removeUnusedResources false
                 obfuscate false
                 optimizeCode false
                 proguardFile 'proguard-rules.pro'
@@ -80,10 +79,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:support-annotations:27.0.1'
-    implementation 'cz.msebera.android:httpclient:4.4.1.2'
+    api 'cz.msebera.android:httpclient:4.4.1.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
 
-apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
+apply from: '../gradle-mvn-push.gradle'

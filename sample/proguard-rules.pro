@@ -16,3 +16,6 @@
 # in C:\Android\sdk/tools/proguard/proguard-android.txt
 
 # Add any project specific keep options here:
+
+-dontwarn com.fasterxml.jackson.**
+-dontwarn com.vorlonsoft.android.http.**
