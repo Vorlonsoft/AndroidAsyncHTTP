@@ -32,6 +32,8 @@ import java.security.cert.X509Certificate;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLParameters;
+import javax.net.ssl.SSLSocket;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
@@ -194,12 +196,26 @@ public class MySSLSocketFactory extends SSLSocketFactory {
 
     @Override
     public Socket createSocket(Socket socket, String host, int port, boolean autoClose) throws IOException {
-        return sslContext.getSocketFactory().createSocket(socket, host, port, autoClose);
+        Socket localSocket = sslContext.getSocketFactory().createSocket(socket, host, port, autoClose);
+        enableSecureProtocols(localSocket);
+        return localSocket;
     }
 
     @Override
     public Socket createSocket() throws IOException {
-        return sslContext.getSocketFactory().createSocket();
+        Socket socket = sslContext.getSocketFactory().createSocket();
+        enableSecureProtocols(socket);
+        return socket;
+    }
+
+    /**
+     * Activate supported protocols on the socket.
+     * @param socket The socket on which to activate secure protocols.
+     */
+    private void enableSecureProtocols(Socket socket) {
+        // set all supported protocols
+        SSLParameters params = sslContext.getSupportedSSLParameters();
+        ((SSLSocket) socket).setEnabledProtocols(params.getProtocols());
     }
 
     /**
