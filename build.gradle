@@ -29,6 +29,10 @@ allprojects {
         google()
         jcenter()
     }
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+        options.compilerArgs << "-Xlint:unchecked"
+    }
 }
 
 task clean(type: Delete) {

@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import cz.msebera.android.httpclient.client.CookieStore;
@@ -93,7 +94,10 @@ public class PersistentCookieStore implements CookieStore {
 
         // Save cookie into persistent store
         SharedPreferences.Editor prefsWriter = cookiePrefs.edit();
-        prefsWriter.putString(COOKIE_NAME_STORE, TextUtils.join(",", cookies.keySet()));
+
+        // This prevents map.keySet to compile to a Java 8+ KeySetView return type
+        Map<String, Cookie> map = cookies;
+        prefsWriter.putString(COOKIE_NAME_STORE, TextUtils.join(",", map.keySet()));
         prefsWriter.putString(COOKIE_NAME_PREFIX + name, encodeCookie(new SerializableCookie(cookie)));
         prefsWriter.apply();
     }
@@ -102,7 +106,9 @@ public class PersistentCookieStore implements CookieStore {
     public void clear() {
         // Clear cookies from persistent store
         SharedPreferences.Editor prefsWriter = cookiePrefs.edit();
-        for (String name : cookies.keySet()) {
+        // This prevents map.keySet to compile to a Java 8+ KeySetView return type
+        Map<String, Cookie> map = cookies;
+        for (String name : map.keySet()) {
             prefsWriter.remove(COOKIE_NAME_PREFIX + name);
         }
         prefsWriter.remove(COOKIE_NAME_STORE);
@@ -132,9 +138,11 @@ public class PersistentCookieStore implements CookieStore {
             }
         }
 
+        // This prevents map.keySet to compile to a Java 8+ KeySetView return type
+        Map<String, Cookie> map = cookies;
         // Update names in persistent store
         if (clearedAny) {
-            prefsWriter.putString(COOKIE_NAME_STORE, TextUtils.join(",", cookies.keySet()));
+            prefsWriter.putString(COOKIE_NAME_STORE, TextUtils.join(",", map.keySet()));
         }
         prefsWriter.apply();
 

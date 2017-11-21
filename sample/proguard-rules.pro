@@ -17,5 +17,13 @@
 
 # Add any project specific keep options here:
 
--dontwarn com.fasterxml.jackson.**
--dontwarn com.vorlonsoft.android.http.**
+# Proguard configuration for Jackson 2.x (fasterxml package)
+-keep class com.fasterxml.jackson.databind.ObjectMapper {
+    public <methods>;
+    protected <methods>;
+}
+-keep class com.fasterxml.jackson.databind.ObjectWriter {
+    public ** writeValueAsString(**);
+}
+-keepnames class com.fasterxml.jackson.** { *; }
+-dontwarn com.fasterxml.jackson.databind.**

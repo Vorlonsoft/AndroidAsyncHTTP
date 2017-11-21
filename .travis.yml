@@ -17,10 +17,12 @@ sudo: false
 jdk: oraclejdk8
 android:
   components:
+    - platform-tools
+    - tools
     - build-tools-27.0.1
-    - extra-android-support
-    - extra-android-m2repository
     - android-27
+    - extra-android-m2repository
+    - extra-google-m2repository
   licenses:
     - '.+'
 script:
