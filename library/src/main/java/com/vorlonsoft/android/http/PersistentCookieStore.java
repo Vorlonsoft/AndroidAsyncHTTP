@@ -138,10 +138,10 @@ public class PersistentCookieStore implements CookieStore {
             }
         }
 
-        // This prevents map.keySet to compile to a Java 8+ KeySetView return type
-        Map<String, Cookie> map = cookies;
         // Update names in persistent store
         if (clearedAny) {
+            // This prevents map.keySet to compile to a Java 8+ KeySetView return type
+            Map<String, Cookie> map = cookies;
             prefsWriter.putString(COOKIE_NAME_STORE, TextUtils.join(",", map.keySet()));
         }
         prefsWriter.apply();

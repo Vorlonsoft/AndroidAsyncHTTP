@@ -14,17 +14,7 @@
   ~ // See the License for the specific language governing permissions and
   ~ // limitations under the License.
 -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.vorlonsoft.android.http"
-    android:versionCode="152"
-    android:versionName="1.5.2"
-    tools:ignore="GradleOverrides">
-
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-sdk android:minSdkVersion="9" />
-
-    <application/>
-
-</manifest>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@drawable/ic_launcher_background"/>
+    <foreground android:drawable="@drawable/ic_launcher_foreground"/>
+</adaptive-icon>

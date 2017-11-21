@@ -12,17 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-VERSION_NAME=1.5.2
-VERSION_CODE=152
-GROUP=com.vorlonsoft
+# By default, the flags in this file are appended to flags specified
+# in C:\Android\sdk/tools/proguard/proguard-android.txt
 
-POM_DESCRIPTION=An Asynchronous HTTP Library for Android
-POM_URL=https://github.com/Vorlonsoft/AndroidAsyncHTTP
-POM_SCM_URL=https://github.com/Vorlonsoft/AndroidAsyncHTTP
-POM_SCM_CONNECTION=scm:git@github.com:Vorlonsoft/AndroidAsyncHTTP.git
-POM_SCM_DEV_CONNECTION=scm:git@github.com:Vorlonsoft/AndroidAsyncHTTP.git
-POM_LICENCE_NAME=The Apache Software License, Version 2.0
-POM_LICENCE_URL=https://www.apache.org/licenses/LICENSE-2.0.txt
-POM_LICENCE_DIST=repo
-POM_DEVELOPER_ID=AlexanderLS
-POM_DEVELOPER_NAME=Alexander Savin
+# Add any project specific keep options here:
+
+# Proguard configuration for Jackson 2.x (fasterxml package)
+-keep class com.fasterxml.jackson.databind.ObjectMapper {
+    public <methods>;
+    protected <methods>;
+}
+-keep class com.fasterxml.jackson.databind.ObjectWriter {
+    public ** writeValueAsString(**);
+}
+-keepnames class com.fasterxml.jackson.** { *; }
+-dontwarn com.fasterxml.jackson.databind.**

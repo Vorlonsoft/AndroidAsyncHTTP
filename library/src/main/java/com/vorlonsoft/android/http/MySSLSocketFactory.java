@@ -80,7 +80,7 @@ public class MySSLSocketFactory extends SSLSocketFactory {
                 Log.w("SSLSocketFactory", "TLSv1.2 is not supported in this device; falling through TLSv1.1");
                 sslContext = SSLContext.getInstance("TLSv1.1");
             } catch (NoSuchAlgorithmException e1) {
-                Log.w("SSLSocketFactory", "TLSv1.2 and TLSv1.1 is not supported in this device; falling through TLSv1.0");
+                Log.w("SSLSocketFactory", "TLSv1.2 and TLSv1.1 is not supported in this device; falling through TLSv1");
                 sslContext = SSLContext.getInstance("TLSv1");
                 // should be available in any device; see reference of supported protocols in
                 // http://developer.android.com/reference/javax/net/ssl/SSLSocket.html
@@ -236,7 +236,7 @@ public class MySSLSocketFactory extends SSLSocketFactory {
             ((SSLSocket) socket).setEnabledProtocols(params.getProtocols());
         }catch (Exception e)
         {
-            Log.w("SSLSocketFactory", e);
+            Log.w("enableSecureProtocols", e);
         }
     }
 

@@ -14,17 +14,15 @@
   ~ // See the License for the specific language governing permissions and
   ~ // limitations under the License.
 -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.vorlonsoft.android.http"
-    android:versionCode="152"
-    android:versionName="1.5.2"
-    tools:ignore="GradleOverrides">
+<resources>
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!--
+        Base application theme for API 14+. This theme completely replaces
+        AppBaseTheme from BOTH res/values/styles.xml and
+        res/values-v11/styles.xml on API 14+ devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <!-- API 14 theme customizations can go here. -->
+    </style>
 
-    <uses-sdk android:minSdkVersion="9" />
-
-    <application/>
-
-</manifest>
+</resources>

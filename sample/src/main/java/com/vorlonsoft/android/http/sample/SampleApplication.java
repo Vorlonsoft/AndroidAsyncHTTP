@@ -16,7 +16,6 @@
 
 package com.vorlonsoft.android.http.sample;
 
-import android.app.Application;
 import android.os.Build;
 import android.os.Process;
 import android.os.StrictMode;
