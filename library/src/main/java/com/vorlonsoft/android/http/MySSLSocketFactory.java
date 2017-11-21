@@ -16,6 +16,8 @@
 
 package com.vorlonsoft.android.http;
 
+import android.util.Log;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,7 +58,7 @@ import cz.msebera.android.httpclient.protocol.HTTP;
  * certificate validation on every device, use with caution
  */
 public class MySSLSocketFactory extends SSLSocketFactory {
-    final SSLContext sslContext = SSLContext.getInstance("TLS");
+    SSLContext sslContext;
 
     /**
      * Creates a new SSL Socket Factory with the given KeyStore.
@@ -69,6 +71,21 @@ public class MySSLSocketFactory extends SSLSocketFactory {
      */
     public MySSLSocketFactory(KeyStore truststore) throws NoSuchAlgorithmException, KeyManagementException, KeyStoreException, UnrecoverableKeyException {
         super(truststore);
+
+        try {
+            sslContext = SSLContext.getInstance("TLSv1.2");
+            Log.w("SSLSocketFactory", "TLSv1.2 is supported");
+        } catch (NoSuchAlgorithmException e2) {
+            try {
+                Log.w("SSLSocketFactory", "TLSv1.2 is not supported in this device; falling through TLSv1.1");
+                sslContext = SSLContext.getInstance("TLSv1.1");
+            } catch (NoSuchAlgorithmException e1) {
+                Log.w("SSLSocketFactory", "TLSv1.2 and TLSv1.1 is not supported in this device; falling through TLSv1.0");
+                sslContext = SSLContext.getInstance("TLSv1");
+                // should be available in any device; see reference of supported protocols in
+                // http://developer.android.com/reference/javax/net/ssl/SSLSocket.html
+            }
+        }
 
         X509TrustManager tm = new X509TrustManager() {
             public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
@@ -214,8 +231,13 @@ public class MySSLSocketFactory extends SSLSocketFactory {
      */
     private void enableSecureProtocols(Socket socket) {
         // set all supported protocols
-        SSLParameters params = sslContext.getSupportedSSLParameters();
-        ((SSLSocket) socket).setEnabledProtocols(params.getProtocols());
+        try {
+            SSLParameters params = sslContext.getSupportedSSLParameters();
+            ((SSLSocket) socket).setEnabledProtocols(params.getProtocols());
+        }catch (Exception e)
+        {
+            Log.w("SSLSocketFactory", e);
+        }
     }
 
     /**
