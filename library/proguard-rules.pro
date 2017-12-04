@@ -12,5 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
--keep class cz.msebera.android.httpclient.** { *; }
 -keep class com.vorlonsoft.android.http.** { *; }
+-keep class cz.msebera.android.httpclient.** { *; }
+-assumenosideeffects class android.util.Log {
+    public static boolean isLoggable(java.lang.String, int);
+    public static int v(...);
+    public static int d(...);
+}

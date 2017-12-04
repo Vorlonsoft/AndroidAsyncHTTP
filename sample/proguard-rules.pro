@@ -18,6 +18,7 @@
 # Add any project specific keep options here:
 
 # Proguard configuration for Jackson 2.x (fasterxml package)
+
 -keep class com.fasterxml.jackson.databind.ObjectMapper {
     public <methods>;
     protected <methods>;
@@ -27,3 +28,8 @@
 }
 -keepnames class com.fasterxml.jackson.** { *; }
 -dontwarn com.fasterxml.jackson.databind.**
+-assumenosideeffects class android.util.Log {
+    public static boolean isLoggable(java.lang.String, int);
+    public static int v(...);
+    public static int d(...);
+}
